@@ -2,5 +2,5 @@ cmake_minimum_required(VERSION 4.4)
 
 project(CppPlay)
 
-add_subdirectory(mylib)
-add_subdirectory(sample)
+add_subdirectory(samplelib)
+add_subdirectory(samplegame)
