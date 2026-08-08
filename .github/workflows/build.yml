@@ -8,17 +8,13 @@ on:
 
 jobs:
   build:
+    name: ${{ matrix.os }} (${{ matrix.build_type }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - os: windows-latest
-            preset: windows
-          - os: ubuntu-latest
-            preset: unix
-          - os: macos-latest
-            preset: unix
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        build_type: [Debug, Release]
     steps:
       - uses: actions/checkout@v4
 
@@ -29,8 +25,27 @@ jobs:
         with:
           vcpkgGitCommitId: ea1a7396b05637a53bf23c078647ecc0edee4b80
 
+      # Windows is multi-config, so its configure preset name is just the OS base name.
+      # Plain "unix" is single-config Debug-only, so the CI matrix (which needs both
+      # Debug and Release) uses "unix-ninja" instead on Linux/macOS.
+      - name: Determine CMake presets
+        id: presets
+        shell: bash
+        run: |
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            base=windows
+          else
+            base=unix-ninja
+          fi
+          build=$base
+          if [ "${{ matrix.build_type }}" = "Release" ]; then
+            build=$base-release
+          fi
+          echo "configure=$base" >> "$GITHUB_OUTPUT"
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+
       - name: Configure
-        run: cmake --preset ${{ matrix.preset }}
+        run: cmake --preset ${{ steps.presets.outputs.configure }}
 
       - name: Build
-        run: cmake --build --preset ${{ matrix.preset }}
+        run: cmake --build --preset ${{ steps.presets.outputs.build }}

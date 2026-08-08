@@ -16,13 +16,25 @@
     },
     {
       "name": "unix",
-      "displayName": "macOS/Linux (vcpkg)",
+      "displayName": "macOS/Linux (Unix Makefiles + vcpkg, Debug)",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       },
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "unix-ninja",
+      "displayName": "macOS/Linux (Ninja Multi-Config + vcpkg)",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "condition": {
         "type": "notEquals",
         "lhs": "${hostSystemName}",
@@ -37,8 +49,23 @@
       "configuration": "Debug"
     },
     {
+      "name": "windows-release",
+      "configurePreset": "windows",
+      "configuration": "Release"
+    },
+    {
       "name": "unix",
       "configurePreset": "unix"
+    },
+    {
+      "name": "unix-ninja",
+      "configurePreset": "unix-ninja",
+      "configuration": "Debug"
+    },
+    {
+      "name": "unix-ninja-release",
+      "configurePreset": "unix-ninja",
+      "configuration": "Release"
     }
   ]
 }
