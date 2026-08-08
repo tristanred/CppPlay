@@ -16,9 +16,10 @@
     },
     {
       "name": "unix",
-      "displayName": "macOS/Linux (system package manager, e.g. Homebrew/apt)",
+      "displayName": "macOS/Linux (vcpkg)",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       },

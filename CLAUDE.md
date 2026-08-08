@@ -28,8 +28,8 @@ CMake with a vcpkg manifest (`vcpkg.json`) for dependencies, driven via CMake Pr
 
 - `windows` — MSVC + vcpkg toolchain. Requires the `VCPKG_ROOT` environment variable to
   point at a vcpkg installation.
-- `unix` — macOS/Linux, uses the system package manager (Homebrew/apt) instead of vcpkg,
-  Debug build type, Unix Makefiles generator.
+- `unix` — macOS/Linux, also vcpkg toolchain (requires `VCPKG_ROOT`), Debug build type,
+  Unix Makefiles generator.
 
 Build output goes to `out/build/<preset-name>/` (gitignored).
 
