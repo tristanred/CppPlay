@@ -24,12 +24,17 @@ for the user to write the code themselves without AI assistance.
 ## Build system
 
 CMake with a vcpkg manifest (`vcpkg.json`) for dependencies, driven via CMake Presets
-(`CMakePresets.json`). Two configure/build presets are defined:
+(`CMakePresets.json`). All presets require the `VCPKG_ROOT` environment variable to point
+at a vcpkg installation.
 
-- `windows` — MSVC + vcpkg toolchain. Requires the `VCPKG_ROOT` environment variable to
-  point at a vcpkg installation.
-- `unix` — macOS/Linux, uses the system package manager (Homebrew/apt) instead of vcpkg,
-  Debug build type, Unix Makefiles generator.
+- `windows` — MSVC + vcpkg toolchain (Visual Studio generator, multi-config). Build preset
+  `windows` builds Debug, `windows-release` builds Release.
+- `unix` — macOS/Linux, vcpkg toolchain, Unix Makefiles generator (single-config, Debug
+  only). The default/simplest way to build on macOS/Linux; `setup.sh` uses `unix-ninja`
+  instead (see below).
+- `unix-ninja` — macOS/Linux, vcpkg toolchain, Ninja Multi-Config generator (requires
+  `ninja` on PATH). Build preset `unix-ninja` builds Debug, `unix-ninja-release` builds
+  Release. Used by `setup.sh` and by CI (to cover both Debug and Release on Linux/macOS).
 
 Build output goes to `out/build/<preset-name>/` (gitignored).
 
@@ -37,10 +42,10 @@ Common commands:
 
 ```bash
 # Configure (first time, or after changing CMakeLists.txt/vcpkg.json)
-cmake --preset windows   # or: cmake --preset unix
+cmake --preset windows   # or: cmake --preset unix   # or: cmake --preset unix-ninja
 
 # Build
-cmake --build --preset windows   # or: cmake --build --preset unix
+cmake --build --preset windows   # or: cmake --build --preset unix   # or: cmake --build --preset unix-ninja
 ```
 
 There are no test targets configured yet, and no lint step defined — the project is early-stage.
