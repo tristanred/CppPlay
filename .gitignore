@@ -90,6 +90,10 @@ _deps
 ### CMake Patch ###
 CMakeUserPresets.json
 
+# CMakePresets binaryDir and vcpkg manifest install output
+/out/
+vcpkg_installed/
+
 # External projects
 *-prefix/
 
