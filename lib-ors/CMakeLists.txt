@@ -14,3 +14,4 @@ target_sources(OrsLib
 )
 
 target_link_libraries(OrsLib PUBLIC libzmq)
+target_compile_options(OrsLib PRIVATE ${PROJECT_WARNING_FLAGS})

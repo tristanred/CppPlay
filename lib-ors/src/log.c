@@ -5,6 +5,8 @@
 void log_trace(char* msg) {
 #if _TRACE
   printf("TRACE: %s\n", msg);
+#else
+  (void)msg;
 #endif
 }
 

@@ -12,3 +12,5 @@ target_link_libraries(ObjectsGame
     OrsLib
     raylib
 )
+
+target_compile_options(ObjectsGame PRIVATE ${PROJECT_WARNING_FLAGS})
