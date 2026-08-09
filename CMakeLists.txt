@@ -2,5 +2,8 @@ cmake_minimum_required(VERSION 4.3)
 
 project(CppPlay)
 
-add_subdirectory(samplelib)
-add_subdirectory(samplegame)
+find_package(ZeroMQ CONFIG REQUIRED)
+
+add_subdirectory(lib-ors)
+add_subdirectory(objects-game)
+add_subdirectory(ors-server)

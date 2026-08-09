@@ -1,1 +1,8 @@
-{}
+{
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "github.copilot.nextEditSuggestions.extendedRange": false,
+    "github.copilot.nextEditSuggestions.fixes": false,
+    "github.copilot.renameSuggestions.triggerAutomatically": true,
+    "git.blame.editorDecoration.enabled": false,
+    "gitlens.currentLine.enabled": false
+}
