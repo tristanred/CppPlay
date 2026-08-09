@@ -20,6 +20,10 @@ jobs:
 
       - uses: lukka/get-cmake@latest
 
+      - name: Install Linux build dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y autoconf autoconf-archive automake libtool xorg-dev libgl1-mesa-dev libglu1-mesa-dev
+
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11
         with:
