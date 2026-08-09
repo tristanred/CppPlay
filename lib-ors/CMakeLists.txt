@@ -2,7 +2,7 @@ add_library(OrsLib)
 
 target_sources(OrsLib
   PRIVATE
-    src/stub.c
+    src/log.c
 
   PUBLIC
     FILE_SET myHeaders
@@ -10,7 +10,7 @@ target_sources(OrsLib
     BASE_DIRS
       include
     FILES
-      include/stub.h
+      include/log.h
 )
 
 target_link_libraries(OrsLib PUBLIC libzmq)

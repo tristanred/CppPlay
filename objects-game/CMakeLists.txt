@@ -1,10 +1,8 @@
-
 add_executable(ObjectsGame)
 
 target_sources(ObjectsGame
   PRIVATE
-    src/stub.c
-    src/stub.h
+    src/main.c
 )
 
 find_package(raylib CONFIG REQUIRED)
