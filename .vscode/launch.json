@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug CMake Tools active target",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "CMake: build"
+        },
+        {
+            "name": "Debug ObjectsGame",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/out/build/unix-ninja/objects-game/Debug/ObjectsGame",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Debug OrsServer",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/out/build/unix-ninja/ors-server/Debug/OrsServer",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

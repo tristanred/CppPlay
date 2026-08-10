@@ -5,8 +5,6 @@ target_sources(ObjectsGame
     src/main.c
 )
 
-find_package(raylib CONFIG REQUIRED)
-
 target_link_libraries(ObjectsGame
   PRIVATE
     OrsLib

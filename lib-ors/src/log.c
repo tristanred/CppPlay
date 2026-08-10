@@ -13,6 +13,8 @@ void log_trace(char* msg) {
 void log_debug(char* msg) {
 #if DEBUG
   printf("DEBUG: %s\n", msg);
+#else
+  (void)(msg);
 #endif
 }
 

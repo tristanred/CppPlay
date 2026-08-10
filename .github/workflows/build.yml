@@ -48,6 +48,16 @@ jobs:
           echo "configure=$base" >> "$GITHUB_OUTPUT"
           echo "build=$build" >> "$GITHUB_OUTPUT"
 
+      # raylib is built from source via FetchContent (see root CMakeLists.txt for why).
+      # Cache its clone + compiled objects so only a raylib version bump pays the full
+      # cost again; Debug and Release share this cache since both build_types configure
+      # into the same preset's binary dir.
+      - name: Cache raylib FetchContent build
+        uses: actions/cache@v4
+        with:
+          path: out/build/${{ steps.presets.outputs.configure }}/_deps
+          key: raylib-fetchcontent-${{ matrix.os }}-${{ steps.presets.outputs.configure }}-${{ hashFiles('CMakeLists.txt') }}
+
       - name: Configure
         run: cmake --preset ${{ steps.presets.outputs.configure }}
 
